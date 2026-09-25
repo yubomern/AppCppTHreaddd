@@ -1,0 +1,10 @@
+All_one.exe terminal capture
+Captured: 2026-09-25
+
+CoarseList: 80 synchronized values found
+FineList: 80 synchronized values found
+LazyList: 80 synchronized values found
+LockFreeList: 80 synchronized values found
+OptimisticList: 80 synchronized values found
+Windows CreateThread counter: 20000
+Completed list operations: 400

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All_one Terminal Capture</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #101418;
+      --panel: #171c21;
+      --border: #34404a;
+      --text: #d8dee9;
+      --muted: #84909a;
+      --cyan: #56d4dd;
+      --green: #73d13d;
+      --yellow: #f5c542;
+      --magenta: #df78ef;
+      --blue: #68a9ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background-color: var(--background);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 24px 24px;
+      font-family: "Cascadia Code", "Consolas", monospace;
+    }
+
+    .terminal {
+      width: min(820px, 100%);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+    }
+
+    .titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .red { background: #ff5f57; }
+    .amber { background: #febc2e; }
+    .lime { background: #28c840; }
+    .title { margin-left: 8px; }
+
+    pre {
+      min-height: 310px;
+      margin: 0;
+      padding: 28px;
+      overflow-x: auto;
+      color: var(--text);
+      font: 16px/1.8 "Cascadia Code", "Consolas", monospace;
+      white-space: pre-wrap;
+    }
+
+    .prompt { color: var(--muted); }
+    .cyan { color: var(--cyan); font-weight: 700; }
+    .green { color: var(--green); font-weight: 700; }
+    .yellow { color: var(--yellow); font-weight: 700; }
+    .magenta { color: var(--magenta); font-weight: 700; }
+    .blue { color: var(--blue); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main class="terminal" aria-label="All_one application terminal capture">
+    <div class="titlebar">
+      <span class="dot red"></span><span class="dot amber"></span><span class="dot lime"></span>
+      <span class="title">PowerShell - All_one.exe</span>
+    </div>
+    <pre><span class="prompt">PS&gt; .\All_one.exe</span>
+<span class="cyan">CoarseList</span>: <span class="green">80</span> synchronized values found
+<span class="green">FineList</span>: <span class="green">80</span> synchronized values found
+<span class="yellow">LazyList</span>: <span class="green">80</span> synchronized values found
+<span class="blue">LockFreeList</span>: <span class="green">80</span> synchronized values found
+<span class="magenta">OptimisticList</span>: <span class="green">80</span> synchronized values found
+<span class="cyan">Windows CreateThread counter:</span> <span class="yellow">20000</span>
+<span class="green">Completed list operations: 400</span>
+<span class="prompt">PS&gt;</span></pre>
+  </main>
+</body>
+</html>
