@@ -4,9 +4,12 @@
 #include <iostream>
 #include <string>
 
+#include "TerminalColors.hpp"
+
 #pragma comment(lib, "Ws2_32.lib")
 
 int runSocketClient(const char* host, const char* port) {
+    terminal::enableColors();
     WSADATA data{};
     if (WSAStartup(MAKEWORD(2, 2), &data) != 0) return 1;
 
@@ -32,7 +35,7 @@ int runSocketClient(const char* host, const char* port) {
     int received;
     while ((received = recv(socketHandle, buffer, sizeof(buffer) - 1, 0)) > 0) {
         buffer[received] = '\0';
-        std::cout << buffer << std::flush;
+        std::cout << terminal::green << buffer << terminal::reset << std::flush;
     }
 
     closesocket(socketHandle);

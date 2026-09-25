@@ -12,6 +12,8 @@
 #include <thread>
 #include <vector>
 
+#include "TerminalColors.hpp"
+
 #pragma comment(lib, "Ws2_32.lib")
 
 namespace {
@@ -89,7 +91,10 @@ void watchDirectory(const std::wstring& directory) {
             std::wstring name(notification->FileName, notification->FileNameLength / sizeof(wchar_t));
             std::wstring type = entryType(directory, name);
             std::string line = narrow(actionName(notification->Action)) + " | " + narrow(type) + " | " + narrow(name) + "\n";
-            std::cout << line;
+            const char* color = notification->Action == FILE_ACTION_REMOVED
+                ? terminal::red
+                : notification->Action == FILE_ACTION_MODIFIED ? terminal::yellow : terminal::green;
+            std::cout << color << line << terminal::reset;
             broadcast(line);
             if (notification->NextEntryOffset == 0) break;
             offset += notification->NextEntryOffset;
@@ -102,6 +107,7 @@ void watchDirectory(const std::wstring& directory) {
 } // namespace
 
 int runWatcherServer(const std::wstring& directory, int port) {
+    terminal::enableColors();
     WSADATA data{};
     if (WSAStartup(MAKEWORD(2, 2), &data) != 0) return 1;
 
@@ -118,7 +124,8 @@ int runWatcherServer(const std::wstring& directory, int port) {
         return 1;
     }
 
-    std::cout << "Watcher server listening on port " << port << "\n";
+    std::cout << terminal::bold << terminal::cyan << "Watcher server listening on port "
+              << port << terminal::reset << "\n";
     std::thread clientThread(acceptClients, server);
     clientThread.detach();
     watchDirectory(directory);

@@ -2,6 +2,7 @@
 #include "FineList.hpp"
 #include "LazyList.hpp"
 #include "OptimisticList.hpp"
+#include "TerminalColors.hpp"
 
 #define LOCK_FREE_LIST_NO_MAIN
 #include "LockFreeList.cpp"
@@ -35,6 +36,14 @@ namespace {
 
 std::mutex outputMutex;
 std::atomic<unsigned int> completedOperations(0);
+
+const char* listColor(const std::string& name) {
+    if (name == "CoarseList") return terminal::cyan;
+    if (name == "FineList") return terminal::green;
+    if (name == "LazyList") return terminal::yellow;
+    if (name == "OptimisticList") return terminal::magenta;
+    return terminal::blue;
+}
 
 template <typename List>
 class SynchronizedList {
@@ -106,7 +115,9 @@ void runList(const std::string& name) {
 
     {
         std::lock_guard<std::mutex> guard(outputMutex);
-        std::cout << name << ": " << found << " synchronized values found\n";
+        std::cout << listColor(name) << terminal::bold << name << terminal::reset
+                  << ": " << terminal::green << found << terminal::reset
+                  << " synchronized values found\n";
     }
 }
 
@@ -153,7 +164,8 @@ void runWindowsThreads() {
     DeleteCriticalSection(&context.criticalSection);
 
     std::lock_guard<std::mutex> guard(outputMutex);
-    std::cout << "Windows CreateThread counter: " << context.counter << "\n";
+    std::cout << terminal::cyan << "Windows CreateThread counter: "
+              << terminal::yellow << context.counter << terminal::reset << "\n";
 }
 
 std::wstring widen(const char* value) {
@@ -175,6 +187,7 @@ std::wstring widen(const char* value) {
 } // namespace
 
 int main(int argc, char* argv[]) {
+    terminal::enableColors();
 #ifdef _WIN32
     if (argc > 1 && std::string(argv[1]) == "watcher") {
         const std::wstring directory = argc > 2 ? widen(argv[2]) : L".";
@@ -207,7 +220,8 @@ int main(int argc, char* argv[]) {
     std::cout << "Windows API example skipped on this platform.\n";
 #endif
 
-    std::cout << "Completed list operations: "
-              << completedOperations.load(std::memory_order_relaxed) << "\n";
+    std::cout << terminal::bold << terminal::green << "Completed list operations: "
+              << completedOperations.load(std::memory_order_relaxed)
+              << terminal::reset << "\n";
     return 0;
 }
