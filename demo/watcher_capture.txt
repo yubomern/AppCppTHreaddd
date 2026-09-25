@@ -1,0 +1,5 @@
+﻿Watcher server listening on port 60715
+Watching demo\watch_target
+ADDED | FILE | all_run_socket_test.tmp
+REMOVED | UNKNOWN_OR_DELETED | all_run_socket_test.tmp
+

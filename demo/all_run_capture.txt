@@ -1,0 +1,21 @@
+=== LINKED LIST + THREAD DEMO ===
+CoarseList: 80 synchronized values found
+FineList: 80 synchronized values found
+LazyList: 80 synchronized values found
+LockFreeList: 80 synchronized values found
+OptimisticList: 80 synchronized values found
+Windows CreateThread counter: 20000
+Completed list operations: 400
+
+=== WATCHER SERVER ===
+Watcher server listening on port 60715
+Watching demo\watch_target
+ADDED | FILE | all_run_socket_test.tmp
+REMOVED | UNKNOWN_OR_DELETED | all_run_socket_test.tmp
+
+=== SOCKET CLIENT ===
+CONNECTED | watcher server
+ADDED | FILE | all_run_socket_test.tmp
+REMOVED | UNKNOWN_OR_DELETED | all_run_socket_test.tmp
+
+All demos passed. Captures saved in demo/.

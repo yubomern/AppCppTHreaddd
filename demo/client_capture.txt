@@ -1,0 +1,4 @@
+﻿CONNECTED | watcher server
+ADDED | FILE | all_run_socket_test.tmp
+REMOVED | UNKNOWN_OR_DELETED | all_run_socket_test.tmp
+
