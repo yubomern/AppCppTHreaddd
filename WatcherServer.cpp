@@ -94,7 +94,7 @@ void watchDirectory(const std::wstring& directory) {
             const char* color = notification->Action == FILE_ACTION_REMOVED
                 ? terminal::red
                 : notification->Action == FILE_ACTION_MODIFIED ? terminal::yellow : terminal::green;
-            std::cout << color << line << terminal::reset;
+            std::cout << color << line << terminal::reset << std::flush;
             broadcast(line);
             if (notification->NextEntryOffset == 0) break;
             offset += notification->NextEntryOffset;
@@ -125,7 +125,7 @@ int runWatcherServer(const std::wstring& directory, int port) {
     }
 
     std::cout << terminal::bold << terminal::cyan << "Watcher server listening on port "
-              << port << terminal::reset << "\n";
+              << port << terminal::reset << "\n" << std::flush;
     std::thread clientThread(acceptClients, server);
     clientThread.detach();
     watchDirectory(directory);
